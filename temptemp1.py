@@ -1,4 +1,13 @@
-import requests
+import pip
+
+def install(package):
+    pip.main(['install', package])
+
+try:
+    import requests
+except ImportError:
+    install('requests')
+    import requests
 import json
 
 def get_weather_forecast(city):
@@ -12,7 +21,7 @@ def get_weather_forecast(city):
     """
 
     api_key = ""
-    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}"
+    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
 
     response = requests.get(url)
     data = response.json()
